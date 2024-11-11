@@ -1,0 +1,42 @@
+version: '3'
+services:
+  postgresdb:
+    image: postgres:11-alpine
+    restart: unless-stopped
+    ports:
+      - 9003:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: geri.mujo22
+      POSTGRES_DB: geridb
+    volumes:
+      - ./db:/var/lib/postgressql/data
+  app:
+    depends_on:
+      - postgresdb
+    build: .
+    restart: unless-stopped
+    env_file: ./.env
+    ports:
+      - 8000:5000
+    environment:
+      - DB_HOST=terraform-20241111150730036600000001.cbjrqddvgoeg.eu-central-1.rds.amazonaws.com
+      - DB_USER=$POSTGRESDB_USER
+      - DB_PASSWORD=$POSTGRES_PASSWORD
+      - DB_NAME=$POSTGRES_DB
+      - DB_PORT=5432
+    stdin_open: true
+    tty: true
+  pgadmin4:
+    image: elestio/pgadmin:latest
+    restart: always
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=$ADMIN_EMAIL
+      - PGADMIN_DEFAULT_PASSWORD=$ADMIN_PASSWORD
+      - PGADMIN_LISTEN_PORT=9000
+    ports:
+      - 9001:9000
+    volumes:
+      - ./servers.json:/pgadmin4/servers.json
+volumes:
+  db:
