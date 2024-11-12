@@ -15,5 +15,8 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build the Docker image
-      run : cd api
-      run: docker build .  --tag geri007/frontend:2.0.4
+      run: docker build . --file Dockerfile --tag geri007/frontend:2.0.6
+    - name: push image to docker hub
+      run: |
+        docker login -u geri007 -p ${{ secrets.DOCKER_HUB_TOKEN }}
+        docker push geri007/frontend:2.0.6

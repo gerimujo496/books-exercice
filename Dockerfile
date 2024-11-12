@@ -1,6 +1,6 @@
 FROM node:alpine
 
-COPY . .
+COPY ./api .
 
 RUN npm install
 
