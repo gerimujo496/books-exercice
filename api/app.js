@@ -81,7 +81,7 @@ router.route('/books').post(
     async (req, res) => {
         try {
             if (!req.body.title) {
-                throw new Error('Invalid params');
+                throw new Error('Invalid params1');
             }
 
             const result = await pgClient.query(
