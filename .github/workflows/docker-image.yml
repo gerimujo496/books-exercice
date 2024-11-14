@@ -1,3 +1,6 @@
+on:
+  push:
+    branches: [ "main" ]
 jobs:
   print_context:
     runs-on: ubuntu-latest
