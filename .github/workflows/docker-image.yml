@@ -22,6 +22,7 @@ jobs:
   ci_cd :
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v4
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag geri007/api:1.0.0
     - name: login to aws 
