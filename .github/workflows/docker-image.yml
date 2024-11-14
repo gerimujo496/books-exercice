@@ -31,8 +31,8 @@ jobs:
       - id: print_npm_i
         working-directory: ./api
         run: |
-          OUTPUT="$(npm i)"
-          echo "test=${OUTPUT}" >> "$GITHUB_OUTPUT"
+          OUTPUT=`npm i`
+          echo $OUTPUT >> "$GITHUB_OUTPUT"
       - id: print_npm_i_2
         run: echo "${{steps.print_npm_i.outputs.test}}"
          
