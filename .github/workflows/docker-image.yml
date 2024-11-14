@@ -2,10 +2,22 @@ on:
   push:
     branches: [ "main" ]
 jobs:
-  print_npm_i:
+  print_npm_i :
     runs-on: ubuntu-latest
+    outputs:
+      output1: ${{steps.print_npm_i.outputs}}
     steps:
       - uses: actions/checkout@v4
-      - name: print npm i
+      - id: print_npm_i
         working-directory: ./api
-        run: npm i 
+        run: npm i >> "$GITHUB_OUTPUT"
+      - id: print_npm_i_2
+        run: echo "${{steps.print_npm_i.outputs}}" 
+  print_npm_i_job_2:
+    runs-on: ubuntu-latest
+    needs: print_npm_i
+    steps: 
+      - name: access npm i from job 2
+        run: echo "${{needs.print_npm_i.outputs.output1}}"
+
+         
