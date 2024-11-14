@@ -2,10 +2,9 @@ on:
   push:
     branches: [ "main" ]
 jobs:
-  print_context:
+  print_npm_i:
     runs-on: ubuntu-latest
     steps:
-      - env:
-          EVENT_CONTEXT: ${{ toJSON(github.event) }}
-        run: |
-          echo $EVENT_CONTEXT
+      -name: print npm i
+      working-directory: ./api
+      run: npm i 
