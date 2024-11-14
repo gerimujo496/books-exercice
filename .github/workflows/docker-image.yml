@@ -30,8 +30,11 @@ jobs:
       - uses: actions/checkout@v4
       - id: print_npm_i
         working-directory: ./api
-        run: echo "test=`npm i`" >> "$GITHUB_OUTPUT"
+        shell: bash
+        run: |
+          OUTPUT=`npm i`
+          echo outputContent=$OUTPUT >> $GITHUB_OUTPUT
       - id: print_npm_i_2
-        run: echo "${{steps.print_npm_i.outputs.test}}"
+        run: echo "${{steps.print_npm_i.outputs.outputContent}}"
          
          
