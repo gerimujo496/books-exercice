@@ -5,6 +5,7 @@ jobs:
   print_npm_i:
     runs-on: ubuntu-latest
     steps:
-      -name: print npm i
-      working-directory: ./api
-      run: npm i 
+      - uses: actions/checkout@v4
+      - name: print npm i
+        working-directory: ./api
+        run: npm i 
