@@ -45,8 +45,10 @@ jobs:
     - id: build_erc_repo_save_output
       working-directory: ./aws
       shell: bash
-      run: echo  outputContent=`terraform apply -target module.ecr -auto-approve` >> $GITHUB_OUTPUT
-    - name: show the output
+      run: |
+       OUTPUT=`terraform apply -target module.ecr -auto-approve`
+       echo  outputContent=$OUTPUT >> $GITHUB_OUTPUT
+    - id: show the output
       shell: bash
       run: echo "${{steps.build_erc_repo_save_output.outputContent}}"
       
