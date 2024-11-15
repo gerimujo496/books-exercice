@@ -66,7 +66,8 @@ jobs:
     - name: edit the config file frontend
       working-directory: ./web_client/src
       shell: bash
-      run: echo "const config = { SERVER_URL: process.env.REACT_APP_SERVER_URL || "${{steps.build_erc_repo_save_output.outputs.lbDns}}}; export default config;" > config.js
+      run: |
+          echo "const config = { SERVER_URL: process.env.REACT_APP_SERVER_URL || '${{steps.build_erc_repo_save_output.outputs.lbDns}}' }; export default config;" > config.js
     - name: run the build command frontend 
       working-directory: ./web_client
       run: npm run build
