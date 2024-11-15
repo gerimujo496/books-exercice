@@ -73,7 +73,7 @@ resource "aws_iam_role_policy_attachment" "ec2-read-only-policy-attachment" {
 
 
 resource "aws_iam_instance_profile" "test_profile" {
-  name="test_role_1"
+  name="test_role_2"
   path="/"
   role = aws_iam_role.role.name
 }
