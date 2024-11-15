@@ -52,7 +52,7 @@ jobs:
       shell: bash
       run: |
 
-       echo "${{steps.print_npm_i.outputs.outputContent}}:1.0.0"
+       echo "${{steps.build_erc_repo_save_output.outputs.outputContent}}:1.0.0"
       #  aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 863872515231.dkr.ecr.eu-central-1.amazonaws.com
       #  docker tag geri007/api:1.0.0 "${{steps.print_npm_i.outputs.outputContent}}:1.0.0"
       #  docker push "${{steps.print_npm_i.outputs.outputContent}}:1.0.0"
