@@ -55,6 +55,7 @@ jobs:
        docker tag geri007/api:1.0.0 "${{steps.build_erc_repo_save_output.outputs.outputContent}}:1.0.0"
        docker push "${{steps.build_erc_repo_save_output.outputs.outputContent}}:1.0.0"
     - name: build the inf
+      working-directory: ./aws
       shell: bash
       run: |
        terraform apply -target module.rds  -target  module.ec2  -var="image=${{steps.build_erc_repo_save_output.outputs.outputContent}}:1.0.0" -auto-approve
