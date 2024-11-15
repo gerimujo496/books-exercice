@@ -60,7 +60,7 @@ jobs:
       working-directory: ./aws
       shell: bash
       run: |
-       terraform apply -target module.rds  -target  module.ec2  -var="image=${{steps.build_erc_repo_save_output.outputs.outputContent}}:1.0.0" -auto-approve
+       terraform apply -target module.rds  -target module.ec2  -target module.s3_bucket  -target module.cloudfront  -var="image=${{steps.build_erc_repo_save_output.outputs.outputContent}}:1.0.0" -auto-approve
 
 
          
