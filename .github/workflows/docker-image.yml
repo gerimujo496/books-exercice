@@ -49,6 +49,7 @@ jobs:
        terraform apply -target module.ecr -auto-approve
        echo outputContent=`terraform output ecrRepo` >> $GITHUB_OUTPUT
     - id: show_the_output
+      working-directory: ./aws
       shell: bash
       run: echo `terraform output ecrRepo`
       
