@@ -8,7 +8,7 @@ module "rds" {
 }
 module "ec2" {
   source = "./modules/ec2"
-
+  image = var.image
   db_adress = module.rds.db_adress
   db_name = module.rds.db_name
   db_password = module.rds.db_password

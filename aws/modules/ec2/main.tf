@@ -198,7 +198,7 @@ resource "aws_ecs_task_definition" "service" {
   
   container_definitions = jsonencode([ {
             "name": "geri-task",
-            "image": "863872515231.dkr.ecr.eu-central-1.amazonaws.com/geri-ecr:1.0.0",
+            "image": "${var.image}",
             "cpu": 0,
             "portMappings": [
                 {

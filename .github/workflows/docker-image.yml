@@ -54,7 +54,11 @@ jobs:
        aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 863872515231.dkr.ecr.eu-central-1.amazonaws.com
        docker tag geri007/api:1.0.0 "${{steps.build_erc_repo_save_output.outputs.outputContent}}:1.0.0"
        docker push "${{steps.build_erc_repo_save_output.outputs.outputContent}}:1.0.0"
-      
+    - name: build the inf
+      shell: bash
+      run: |
+       terraform apply -target module.rds  -target  module.ec2  -var="image=${{steps.build_erc_repo_save_output.outputs.outputContent}}:1.0.0" -auto-approve
+
 
          
          

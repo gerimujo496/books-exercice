@@ -22,3 +22,8 @@ variable "db_port" {
   description = "db port"
   type = string
 }
+
+variable "image" {
+  description = "image"
+  type = string
+}
