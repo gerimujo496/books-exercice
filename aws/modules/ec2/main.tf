@@ -165,7 +165,7 @@ resource "aws_lb_target_group" "ecs_tg" {
 
 
 resource "aws_ecs_capacity_provider" "ecs_capacity_provider" {
- name = "test3"
+ name = "geriCapacity"
 
  auto_scaling_group_provider {
    auto_scaling_group_arn = aws_autoscaling_group.asg.arn
