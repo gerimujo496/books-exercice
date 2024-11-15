@@ -4,7 +4,7 @@ provider "aws" {
 
 terraform {
   backend "s3" {
-    bucket = "terraformRemoteStateGeri"
+    bucket = "terraform-remote-state-geri"
     key    = "key/terraform.tfstate"
     region = "eu-central-1"
   }
