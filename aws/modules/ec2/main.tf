@@ -78,15 +78,6 @@ resource "aws_iam_instance_profile" "test_profile" {
   role = aws_iam_role.role.name
 }
 
-resource "aws_ecr_repository" "name" {
-  name = "geri-ecr"
-
-  image_tag_mutability = "MUTABLE"
-
-  image_scanning_configuration {
-    scan_on_push = true
-  }
-}
 
 resource "aws_ecs_cluster" "ecs" {
   name = "geriCluster1"

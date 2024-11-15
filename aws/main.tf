@@ -16,3 +16,6 @@ module "ec2" {
   db_username = module.rds.db_username
 }
 
+module "ecr" {
+  source = "./modules/ecr"
+}
