@@ -50,18 +50,29 @@ jobs:
        terraform refresh -var="image=ami"
        terraform apply -target module.ecr -var="image=ami" -auto-approve
        echo outputContent=`terraform output ecrRepo` >> $GITHUB_OUTPUT
+       echo lbDns=`terraform output lbDns` >> $GITHUB_OUTPUT
     - name: push the image to ecr
       shell: bash
       run: |
        aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 863872515231.dkr.ecr.eu-central-1.amazonaws.com
        docker tag geri007/api:1.0.0 "${{steps.build_erc_repo_save_output.outputs.outputContent}}:1.0.0"
        docker push "${{steps.build_erc_repo_save_output.outputs.outputContent}}:1.0.0"
-    - name: build the inf
+    - id: build_the_inf
       working-directory: ./aws
       shell: bash
       run: |
-       terraform apply -target module.rds  -target module.ec2  -target module.s3_bucket  -target module.cloudfront  -var="image=${{steps.build_erc_repo_save_output.outputs.outputContent}}:1.0.0" -auto-approve
-
-
-         
+       terraform apply -target module.rds  -target module.ec2  -target module.s3_bucket -var="image=${{steps.build_erc_repo_save_output.outputs.outputContent}}:1.0.0" -auto-approve
+       echo s3Name=`terraform output s3BucketName` >> $GITHUB_OUTPUT
+    - name: edit the config file frontend
+      working-directory: ./web_client/src
+      shell: bash
+      run: echo "const config = { SERVER_URL: process.env.REACT_APP_SERVER_URL || "${{steps.build_erc_repo_save_output.outputs.lbDns}}}; export default config;" > config.js
+    - name: run the build command frontend 
+      working-directory: ./web_client
+      run: npm run build
+    - name: copy the build to s3
+      run: aws s3 cp ./web_client/build s3://${{steps.build_the_inf.outputs.s3Name}}/ --recursive
+    - name: build the cloudfront
+      working-directory: ./aws
+      run: terraform apply -target module.cloudfront -var="image=${{steps.build_erc_repo_save_output.outputs.outputContent}}:1.0.0" -auto-approve
          
