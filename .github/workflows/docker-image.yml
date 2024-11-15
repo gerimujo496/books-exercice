@@ -50,7 +50,7 @@ jobs:
        echo outputContent=`terraform output ecrRepo` >> $GITHUB_OUTPUT
     - id: show_the_output
       shell: bash
-      run: echo "${{steps.build_erc_repo_save_output.outputContent}}"
+      run: echo `terraform output ecrRepo`
       
 
          
