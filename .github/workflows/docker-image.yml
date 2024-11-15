@@ -46,7 +46,7 @@ jobs:
       working-directory: ./aws
       shell: bash
       run: |
-       terraform apply -target module.ecr -auto-approve
+       terraform apply -target module.ecr -var="image=ami" -auto-approve
        echo outputContent=`terraform output ecrRepo` >> $GITHUB_OUTPUT
     - name: push the image to ecr
       shell: bash
