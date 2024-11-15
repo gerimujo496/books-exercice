@@ -44,7 +44,7 @@ jobs:
       run: terraform init
     - id: build_erc_repo_save_output
       working-directory: ./aws
-      run: terraform apply -target module.ecr >> $GITHUB_OUTPUT
+      run: terraform apply -target module.ecr -auto-approve >> $GITHUB_OUTPUT
     - name: show the output
       run: echo "${{steps.build_erc_repo_save_output.ecrRepo}}"
       
