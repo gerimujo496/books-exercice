@@ -27,7 +27,7 @@ on:
   push:
     branches: ["main"]
 jobs:
-  ci_cd :
+  build_docker_image_ecr :
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -48,10 +48,13 @@ jobs:
       run: |
        terraform apply -target module.ecr -auto-approve
        echo outputContent=`terraform output ecrRepo` >> $GITHUB_OUTPUT
-    - id: show_the_output
-      working-directory: ./aws
+    - name: push the image to ecr
       shell: bash
-      run: echo `terraform output ecrRepo`
+      run: |
+       aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 863872515231.dkr.ecr.eu-central-1.amazonaws.com
+       docker tag geri007/api:1.0.0 "${terraform output ecrRepo}:1.0.0"
+       docker push "${terraform output ecrRepo}:1.0.0"
+
       
 
          
