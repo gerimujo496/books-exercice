@@ -26,3 +26,24 @@ module "ec2" {
 module "ecr" {
   source = "./modules/ecr"
 }
+
+
+
+module "s3_bucket"{
+  source = "./modules/s3"
+
+  bucket_name = "geri007"
+
+  document_suffix = "index.html"
+  document_error = "error.html"
+}
+
+module "cloudfront" {
+  source = "./modules/cloudfront"
+
+domain_name = module.s3_bucket.domain_name
+bucket =  module.s3_bucket.bucket
+
+  document_suffix = "index.html"
+
+}
