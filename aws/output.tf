@@ -7,7 +7,7 @@ output "ecrRepo" {
 
 output "lbDns" {
   description = "dnslb"
-  value = module.ec2.lbDns
+  value = module.ecr.lbDns
 }
 
 output "s3BucketName" {

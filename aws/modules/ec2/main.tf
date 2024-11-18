@@ -131,7 +131,7 @@ resource "aws_autoscaling_group" "asg" {
 
 
 resource "aws_lb_listener" "name" {
-  load_balancer_arn = var.aws_lb_arn
+  load_balancer_arn =var.aws_lb_arn
   port = 80
   protocol = "HTTP"
   default_action {

@@ -21,7 +21,7 @@ module "ec2" {
   db_password = module.rds.db_password
   db_port = module.rds.db_port
   db_username = module.rds.db_username
-  aws_lb_arn = module.ecr.aws_lb_arn
+   aws_lb_arn = module.ecr.aws_lb_arn
 }
 
 module "ecr" {
