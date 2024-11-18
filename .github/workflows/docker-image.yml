@@ -72,7 +72,6 @@ jobs:
         run: |
           npm i 
           npm run build
-
       - name: copy the build to s3
         run: aws s3 cp ./web_client/build s3://${{steps.build_the_inf.outputs.s3Name}}/ --recursive
       # - name: build the cloudfront
