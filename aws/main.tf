@@ -39,12 +39,12 @@ module "s3_bucket"{
   document_error = "error.html"
 }
 
-module "cloudfront" {
-  source = "./modules/cloudfront"
+# module "cloudfront" {
+#   source = "./modules/cloudfront"
 
-domain_name = module.s3_bucket.domain_name
-bucket =  module.s3_bucket.bucket
+# domain_name = module.s3_bucket.domain_name
+# bucket =  module.s3_bucket.bucket
 
-  document_suffix = "index.html"
+#   document_suffix = "index.html"
 
-}
+# }
