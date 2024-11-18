@@ -129,18 +129,9 @@ resource "aws_autoscaling_group" "asg" {
 }
 
 
-resource "aws_lb" "elb" {
-  name = "geri-lb"
-  load_balancer_type = "application"
-
-subnets =  ["subnet-048ed615c746deb83", "subnet-0c446972c4be90650"]
-  tags = {
-    Name = "geri-lb"
-  }
-}
 
 resource "aws_lb_listener" "name" {
-  load_balancer_arn = aws_lb.elb.arn
+  load_balancer_arn = var.aws_lb_arn
   port = 80
   protocol = "HTTP"
   default_action {

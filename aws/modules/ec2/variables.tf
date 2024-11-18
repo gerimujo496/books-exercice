@@ -27,3 +27,9 @@ variable "image" {
   description = "image"
   type = string
 }
+
+variable "aws_lb_arn" {
+  description = "aws_lb arn"
+  type = string
+  
+}
