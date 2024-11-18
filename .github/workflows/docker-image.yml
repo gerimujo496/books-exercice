@@ -1,25 +1,3 @@
-# on:
-#   push:
-#     branches: ["main"]
-# jobs:
-#   print_npm_i :
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v4
-#       - id: print_npm_i
-#         working-directory: ./api
-#         shell: bash
-#         run: |
-#           OUTPUT=`npm i`
-#           echo outputContent=$OUTPUT >> $GITHUB_OUTPUT
-#       - id: print_npm_i_2
-#         run: echo "${{steps.print_npm_i.outputs.outputContent}}"
-
-#      - name: build inf
-# working-directory: ./aws
-# run: |
-#    terraform init
-#    terraform destroy -auto-approve
 
 on:
   push:
@@ -74,6 +52,4 @@ jobs:
           npm run build
       - name: copy the build to s3
         run: aws s3 cp ./web_client/build s3://${{steps.build_the_inf.outputs.s3Name}}/ --recursive
-      # - name: build the cloudfront
-      #   working-directory: ./aws
-      #   run: terraform apply -target module.cloudfront -var="image=${{steps.build_erc_repo_save_output.outputs.outputContent}}:1.0.0" -auto-approve
+    
